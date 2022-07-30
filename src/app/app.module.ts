@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JugadorComponent } from './components/jugador/jugador.component';
 import { HomeComponent } from './components/home/home.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
@@ -23,7 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     JugadorComponent,
     HomeComponent,
-    FooterComponent
   ],
   imports: [
     HttpClientModule,
