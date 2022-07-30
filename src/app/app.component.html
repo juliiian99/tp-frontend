@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  Toolbar Title
+</mat-toolbar>
+
+<mat-sidenav-container >
+  <mat-sidenav
+    mode="side"
+    [(opened)]="opened"
+  >
+    Sidenav content
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
