@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Jugador } from '../../clases/jugador';
+import { Jugador } from 'src/app/clases/jugador';
 import { JugadorService } from 'src/app/services/jugadores/jugador.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class JugadorComponent implements OnInit {
   jugadores: Jugador[] = [];
   jugador?: Jugador;
   nombreUsuario: String = 'test';
-  columns: String[] = ['nombre-usuario', 'nombre', 'apellido', 'contrasena'];
+  columns: String[] = ['nombre-usuario', 'nombre', 'apellido', 'contrasena', 'acciones'];
 
   constructor(private jugadorService: JugadorService) { }
 
@@ -20,14 +20,14 @@ export class JugadorComponent implements OnInit {
     this.getByNombreUsuario(this.nombreUsuario);
   }
 
-  getJugadores(): void{
+  getJugadores(): void {
     this.jugadorService.getJugadores()
-    .subscribe( jugadores => this.jugadores = jugadores );
+      .subscribe(jugadores => this.jugadores = jugadores);
   }
 
   getByNombreUsuario(nombreUsuario: String): void {
     this.jugadorService.getByNombreUsuario(nombreUsuario)
-    .subscribe( jugador => this.jugador = jugador );
+      .subscribe(jugador => this.jugador = jugador);
   }
 
 }

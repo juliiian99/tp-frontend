@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Jugador</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-card-content>
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de Usuario</mat-label>
+                <input matInput placeholder="Usuario" [value]="jugador?.nombre_usuario">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" [value]="jugador?.nombre">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="Apellido" [value]="jugador?.apellido">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput placeholder="Contraseña" [value]="jugador?.contrasena">
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-button color="primary">Editar</button>
+        <button mat-button color="warn">Eliminar</button>
+    </mat-card-actions>
+  </mat-card>

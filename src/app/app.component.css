@@ -1,6 +1,11 @@
-.sidenav{
-    width: 25%;
+.sidenav {
+    width: 20%;
 }
-mat-sidenav-container{
+
+mat-sidenav-container {
     height: 100vh;
+}
+
+mat-nav-list mat-icon {
+    margin: 0px 30px;
 }

@@ -14,14 +14,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AbmcJugadorComponent } from './components/jugador/abmc-jugador/abmc-jugador.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JugadorComponent,
     HomeComponent,
+    AbmcJugadorComponent,
   ],
   imports: [
     HttpClientModule,
@@ -35,6 +41,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatOptionModule,
     MatSelectModule,
     MatTableModule,
+    MatListModule,
+    MatCardModule,
+    MatDividerModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

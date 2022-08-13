@@ -1,0 +1,17 @@
+mat-card {
+    max-width: 80%;
+    margin: auto auto;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-card-header {
+    justify-content: center;
+}
+
+mat-card-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+}
