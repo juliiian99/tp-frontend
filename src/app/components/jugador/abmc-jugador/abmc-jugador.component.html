@@ -1,6 +1,7 @@
-<mat-card>
+<div>
+<mat-card fxFlexAlign="stretch">
     <mat-card-header>
-        <mat-card-title>Jugador</mat-card-title>
+        <mat-card-title><h2>Jugador</h2></mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -9,24 +10,29 @@
         <form>
             <mat-form-field appearance="fill">
                 <mat-label>Nombre de Usuario</mat-label>
-                <input matInput placeholder="Usuario" [value]="jugador?.nombre_usuario">
+                <input matInput placeholder="Usuario" [(ngModel)]="jugador.nombre_usuario" name="nombre_usuario">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" [value]="jugador?.nombre">
+                <input matInput placeholder="Nombre" [(ngModel)]="jugador.nombre" name="nombre">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Apellido</mat-label>
-                <input matInput placeholder="Apellido" [value]="jugador?.apellido">
+                <input matInput placeholder="Apellido" [(ngModel)]="jugador.apellido" name="apellido">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Contraseña</mat-label>
-                <input matInput placeholder="Contraseña" [value]="jugador?.contrasena">
+                <input matInput placeholder="Contraseña" [(ngModel)]="jugador.contrasena" name="contrasena">
             </mat-form-field>
         </form>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button mat-button color="primary">Editar</button>
-        <button mat-button color="warn">Eliminar</button>
+        <div *ngIf="nombreUsuario === 'nuevo'; else elseBlock">
+            <button mat-button color="primary" (click)="create()">Crear</button>
+        </div>
+        <ng-template #elseBlock>
+            <button mat-button color="primary" (click)="update()">Editar</button>
+        </ng-template>
     </mat-card-actions>
   </mat-card>
+</div>

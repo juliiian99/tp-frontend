@@ -1,4 +1,9 @@
-<h1> Jugadores </h1>
+<div id="title">
+    <h1> Jugadores </h1>
+</div>
+<div id="add">
+    <button mat-raised-button color="primary" routerLink="nuevo">Agregar</button>
+</div>
 <table mat-table [dataSource]="jugadores" class="mat-elevation-z8">
     <ng-container matColumnDef="nombre-usuario">
         <th mat-header-cell *matHeaderCellDef> Nombre de Usuario </th>
@@ -17,10 +22,14 @@
         <td mat-cell *matCellDef="let jugador"> {{jugador.contrasena}} </td>
     </ng-container>
     <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let jugador"> <button mat-raised-button color="primary" [routerLink]="jugador.nombre_usuario">Ver</button> </td>
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let jugador"> 
+            <button mat-raised-button color="primary" [routerLink]="jugador.nombre_usuario">Ver</button> 
+            <button mat-raised-button color="warn" (click)="delete(jugador.nombre_usuario)">Eliminar</button>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>
+

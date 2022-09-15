@@ -15,3 +15,12 @@ mat-card-title {
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
 }
+
+mat-card-title h2 {
+    text-align: center;
+    padding: 30px;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+}
+

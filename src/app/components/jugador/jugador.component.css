@@ -9,3 +9,16 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
 }
+
+#title{
+    display: inline-block;
+    width: 90%;
+}
+
+#add{
+    display: inline-block;
+}
+
+button { 
+    margin-left: 10px;
+}
