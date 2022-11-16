@@ -52,7 +52,7 @@ export class AbmcJugadorComponent implements OnInit {
 
   getByNombreUsuario(nombreUsuario: string): void {
     this.jugadorService.getByNombreUsuario(nombreUsuario)
-      .subscribe(jugador => this.jugador = jugador);
+      .subscribe(jugador => this.jugador = jugador as Jugador);
   }
 
   create(){
