@@ -23,6 +23,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { HttpClientModule } from '@angular/common/http';
+import { SocketComponent } from './components/socket/socket.component';
+
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+
+const config: SocketIoConfig = {
+  url: environment.urlSocket,
+  options: {
+    transports: ['websocket']
+  }
+};
 
 @NgModule({
   declarations: [
@@ -30,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     JugadorComponent,
     HomeComponent,
     AbmcJugadorComponent,
+    SocketComponent,
   ],
   imports: [
     HttpClientModule,
@@ -49,6 +61,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatInputModule,
     MatGridListModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]

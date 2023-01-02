@@ -1,0 +1,30 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.msgs-box {
+  display: block;
+  background-color: rgba(184, 206, 202, 0.278);
+  overflow-y: scroll;
+}
+
+.messages {
+  height: 80%;
+  width: 80%;
+  overflow: auto;
+}
+
+p {
+  font-size: 18px;
+}
+
+canvas {
+  margin-top: 70px;
+}
