@@ -1,8 +1,10 @@
 <mat-grid-list cols="2" rowHeight="40vh">
     <mat-grid-tile rowspan="2">
-        <canvas #canvas></canvas>
+        <div class="canvasDiv" #canvasDiv>
+            <canvas #canvas></canvas>
+        </div>
     </mat-grid-tile>
-    <mat-grid-tile class="msgs-box">
+    <mat-grid-tile>
         <div #scrollMe class="messages">
             <p *ngFor="let msg of msgs">{{ msg }}</p>
         </div>

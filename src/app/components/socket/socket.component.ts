@@ -15,8 +15,10 @@ export class SocketComponent implements OnInit {
   cellSize: number = 0;
   playerId: number = 0;
   nickname: string = 'default';
+  players: any = null;
   @ViewChild('scrollMe') private myScrollContainer?: ElementRef;
   @ViewChild('canvas', {static: false}) canvas?: ElementRef;
+  @ViewChild('canvasDiv') private canvasDiv?: ElementRef;
 
   constructor(private socketService: SocketService ) { }
 
@@ -60,14 +62,15 @@ export class SocketComponent implements OnInit {
   }
 
   setCanvas() : void {
-    var ratio = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
-    this.canvas ? this.canvas.nativeElement.width = this.canvas.nativeElement.height = ratio -100 : null;
-    this.gridSize = 40;
-    this.cellSize = ratio / this.gridSize;
-    console.table([
-      [window.innerHeight, window.innerWidth],
-      this.canvas ? [this.canvas.nativeElement.innerHeight, this.canvas.nativeElement.innerWidth]: 'narnia'
-    ]);
+    if(this.canvasDiv){
+      var ratio =
+        this.canvasDiv.nativeElement.offsetWidth < this.canvasDiv.nativeElement.offsetHeight
+        ? this.canvasDiv.nativeElement.offsetWidth
+        : this.canvasDiv.nativeElement.offsetHeight;
+        this.canvas ? this.canvas.nativeElement.width = this.canvas.nativeElement.height = ratio : null;
+        this.gridSize = 40;
+        this.cellSize = ratio / this.gridSize;
+    }
   }
 
   /*
@@ -109,6 +112,7 @@ export class SocketComponent implements OnInit {
 
   state(){
     this.socketService.state().subscribe((stuff : any) => {
+      this.players = stuff.players;
       this.draw(stuff.players, stuff.apples);
     });
   }
