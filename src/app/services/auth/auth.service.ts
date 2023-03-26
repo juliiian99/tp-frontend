@@ -17,6 +17,7 @@ export class AuthService {
       .pipe(tap(
         (res: JwtResponse) => {
           if (res) {
+            console.log(res.playerData.accessToken, res.playerData.expiresIn);
             this.saveToken(res.playerData.accessToken, res.playerData.expiresIn);
           }
         })
@@ -29,6 +30,7 @@ export class AuthService {
         (res: JwtResponse) => {
           if (res) {
             this.saveToken(res.playerData.accessToken, res.playerData.expiresIn);
+            this.getToken();
           }
         })
       );
@@ -41,6 +43,7 @@ export class AuthService {
   }
 
   private saveToken(token: string, expiresIn: string): void {
+    console.log(token, expiresIn);
     localStorage.setItem("ACCESS_TOKEN", token);
     localStorage.setItem("EXPIRES_IN", expiresIn);
     this.token = token;
