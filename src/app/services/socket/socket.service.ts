@@ -13,7 +13,7 @@ export class SocketService {
   }
 
   disconnect() : void {
-    this.socket.emit('disconnect');
+    this.socket.disconnect();
   }
 
   sendMessage(msg: string) : void{
@@ -24,8 +24,8 @@ export class SocketService {
     return this.socket.emit('key', key);
   }
 
-  auth(nickname: string, session: CallableFunction){
-    return this.socket.emit('auth', { nickname }, session);
+  auth(playerConfigurations: any, session: CallableFunction){
+    return this.socket.emit('auth', playerConfigurations, session);
   }
 
   state(){
@@ -39,8 +39,8 @@ export class SocketService {
 
   getMessage() {
     return new Observable((observer: Observer<any>)=>{
-      this.socket.on('message', (message:string)=>{
-        observer.next(message)
+      this.socket.on('message', (nickname: string, message:string)=>{
+        observer.next({nickname, message})
       })
     })
   }

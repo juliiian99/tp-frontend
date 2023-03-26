@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { JugadorComponent } from './components/jugador/jugador.component';
+import { PlayerComponent } from './components/player/player.component';
 import { HomeComponent } from './components/home/home.component';
-import { AbmcJugadorComponent } from './components/jugador/abmc-jugador/abmc-jugador.component';
+import { PlayerCrudComponent } from './components/player/player-crud/player-crud.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -28,6 +28,26 @@ import { SocketComponent } from './components/socket/socket.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 
+const imports = [
+  HttpClientModule,
+  FormsModule,
+  BrowserModule,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatTableModule,
+  MatListModule,
+  MatCardModule,
+  MatDividerModule,
+  MatInputModule,
+  MatGridListModule,
+];
+
 const config: SocketIoConfig = {
   url: environment.urlSocket,
   options: {
@@ -38,29 +58,13 @@ const config: SocketIoConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    JugadorComponent,
+    PlayerComponent,
     HomeComponent,
-    AbmcJugadorComponent,
+    PlayerCrudComponent,
     SocketComponent,
   ],
   imports: [
-    HttpClientModule,
-    FormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTableModule,
-    MatListModule,
-    MatCardModule,
-    MatDividerModule,
-    MatInputModule,
-    MatGridListModule,
+    [...imports],
     SocketIoModule.forRoot(config),
   ],
   providers: [],

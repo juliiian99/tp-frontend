@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { JugadorComponent } from './components/jugador/jugador.component';
+import { PlayerComponent } from './components/player/player.component';
 import { HomeComponent } from './components/home/home.component';
-import { AbmcJugadorComponent } from './components/jugador/abmc-jugador/abmc-jugador.component';
+import { PlayerCrudComponent } from './components/player/player-crud/player-crud.component';
 import { SocketComponent } from './components/socket/socket.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  { path: 'home', component: HomeComponent },
   { path: 'socket', component: SocketComponent },
-  { path: 'jugadores', component: JugadorComponent },
-  { path: 'jugadores/:nombre_usuario', component: AbmcJugadorComponent },
+  { path: 'players', component: PlayerComponent },
+  { path: 'players/:username', component: PlayerCrudComponent },
 ];
 
 @NgModule({

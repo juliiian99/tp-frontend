@@ -10,24 +10,24 @@
         <form>
             <mat-form-field appearance="fill">
                 <mat-label>Nombre de Usuario</mat-label>
-                <input matInput placeholder="Usuario" [(ngModel)]="jugador.nombre_usuario" name="nombre_usuario">
+                <input matInput placeholder="Usuario" [(ngModel)]="player.username" name="username">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" [(ngModel)]="jugador.nombre" name="nombre">
+                <input matInput placeholder="Nombre" [(ngModel)]="player.name" name="name">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Apellido</mat-label>
-                <input matInput placeholder="Apellido" [(ngModel)]="jugador.apellido" name="apellido">
+                <input matInput placeholder="Apellido" [(ngModel)]="player.lastname" name="lastname">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Contraseña</mat-label>
-                <input matInput placeholder="Contraseña" [(ngModel)]="jugador.contrasena" name="contrasena">
+                <input matInput placeholder="Contraseña" [(ngModel)]="player.password" name="password">
             </mat-form-field>
         </form>
     </mat-card-content>
     <mat-card-actions align="end">
-        <div *ngIf="nombreUsuario === 'nuevo'; else elseBlock">
+        <div *ngIf="username === 'new'; else elseBlock">
             <button mat-button color="primary" (click)="create()">Crear</button>
         </div>
         <ng-template #elseBlock>

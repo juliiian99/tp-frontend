@@ -9,3 +9,7 @@ mat-sidenav-container {
 mat-nav-list mat-icon {
     margin: 0px 30px;
 }
+
+body{
+    overflow: hidden;
+}

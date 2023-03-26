@@ -1,4 +1,12 @@
-<mat-grid-list cols="2" rowHeight="40vh">
+<mat-grid-list cols="1" rowHeight="20vh">
+    <mat-grid-tile>
+        <ul>
+            <li *ngFor="let player of players">{{player.nickname}}: {{ player.points }}</li>
+        </ul>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="2" rowHeight="33vh">
     <mat-grid-tile rowspan="2">
         <div class="canvasDiv" #canvasDiv>
             <canvas #canvas></canvas>

@@ -6,7 +6,7 @@ import { SocketService } from 'src/app/services/socket/socket.service';
   templateUrl: './socket.component.html',
   styleUrls: ['./socket.component.css']
 })
-export class SocketComponent implements OnInit {
+export class SocketComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
 
   context?: CanvasRenderingContext2D;
   msgs: string[] = [''];
@@ -31,8 +31,8 @@ export class SocketComponent implements OnInit {
     this.socketService.connect();
     this.socketService
       .getMessage()
-      .subscribe((message: string) => {
-        this.msgs.push(message);
+      .subscribe(({nickname, message}) => {
+        this.msgs.push(`${nickname}: ${message}`);
       });
       this.auth();
       this.state();
@@ -78,22 +78,39 @@ export class SocketComponent implements OnInit {
   */
   draw(players : any, apples : any) : void {
     // Render background
-    this.context ? this.context.fillStyle = "#555" : null;
-    this.context && this.canvas ? this.context.fillRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height) : null;
+    if(this.context && this.canvas){
+      let grd = this.context.createRadialGradient(this.canvas.nativeElement.width / 2, this.canvas.nativeElement.height / 1.8, 20, this.canvas.nativeElement.width / 2, this.canvas.nativeElement.height / 2, 200);
+      grd.addColorStop(0,"black");
+      // grd.addColorStop(0.2,"orange");
+      // grd.addColorStop(0.4,"green");
+      // grd.addColorStop(0.6,"red");
+      // grd.addColorStop(0.8,"yellow");
+      grd.addColorStop(1,"gray");
+      this.context.fillStyle = grd;
+      this.context.fillRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+
+      this.context.font = "30px Comic Sans MS";
+      this.players.forEach((player: any, index:number) => {
+        let legendY = ++index * 40;
+        this.context ? this.context.fillStyle = "rgba(255,255,255, 0.2)" : null;
+        this.context ? this.context.textAlign = "start" : null;
+        this.context?.fillText(`${player.nickname}`, this.canvas?.nativeElement.width / 1.6, legendY);
+        this.context? this.context.fillStyle = player.color : null;
+        this.context?.fillRect(this.canvas?.nativeElement.width - 30, legendY - 20, 20, 20);
+      })
+    }
 
     // Render players
     players.forEach((p : any) => {
-      if(p.id === this.playerId) {
-        this.context ? this.context.fillStyle = "#fff" : null;
-      } else {
-        this.context ? this.context.fillStyle = "#4286f4" : null;
-      }
-      this.context ? this.context.fillRect(p.x * this.cellSize, p.y * this.cellSize, this.cellSize, this.cellSize) : null;
+      if(this.context){
+        this.context.fillStyle = p.color;
+        this.context.fillRect(p.x * this.cellSize, p.y * this.cellSize, this.cellSize, this.cellSize);
 
-      // tails
-      p.tail.forEach((t : any) => {
-        this.context ? this.context.fillRect(t.x * this.cellSize, t.y * this.cellSize, this.cellSize, this.cellSize) : null;
-      });
+        // tails
+        p.tail.forEach((t : any) => {
+          this.context?.fillRect(t.x * this.cellSize, t.y * this.cellSize, this.cellSize, this.cellSize);
+        });
+      }
     });
 
     // Render apples
@@ -107,7 +124,8 @@ export class SocketComponent implements OnInit {
 
   // Authenticate
   auth(){
-    this.socketService.auth(this.nickname, (session: any) => { this.playerId = session.id })
+    let playerConfigurations = { nickname : 'default', color: '#fff'};
+    this.socketService.auth(playerConfigurations, (session: any) => { this.playerId = session.id });
   }
 
   state(){
