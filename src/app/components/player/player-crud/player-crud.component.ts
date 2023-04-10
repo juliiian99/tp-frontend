@@ -12,13 +12,15 @@ import Swal from 'sweetalert2';
 })
 export class PlayerCrudComponent implements OnInit {
   player: Player = {
-    username: "",
-    name: "",
-    lastname: "",
-    password:""
+    username: '',
+    name: '',
+    lastname: '',
+    password:'',
+    expiresIn: '',
+    accessToken: '',
   };
   username?: string;
-  errors: String = "";
+  errors: String = '';
 
   constructor(private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 

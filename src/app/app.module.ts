@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './components/player/player.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlayerCrudComponent } from './components/player/player-crud/player-crud.component';
+import { SocketComponent } from './components/socket/socket.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -22,8 +23,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 
-import { HttpClientModule } from '@angular/common/http';
-import { SocketComponent } from './components/socket/socket.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/auth/token-interceptor.service';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
@@ -67,7 +69,14 @@ const config: SocketIoConfig = {
     [...imports],
     SocketIoModule.forRoot(config),
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

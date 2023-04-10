@@ -1,6 +1,8 @@
 export interface Player {
-    username: String;
-    name: String;
-    lastname: String;
-    password: String;
+    username: string;
+    name: string;
+    lastname: string;
+    password: string;
+    accessToken: string,
+    expiresIn: string,
 }
