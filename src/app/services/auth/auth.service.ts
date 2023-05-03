@@ -10,12 +10,13 @@ export class AuthService {
   AUTH_SERVER: string = 'http://localhost:3000/auth';
   authSubject = new BehaviorSubject(false);
   private token: string = '';
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   register(user: Player): Observable<Player> {
-    return this.httpClient.post<Player>(`${this.AUTH_SERVER}/register`, user)
-      .pipe(tap(
-        (player: Player) => {
+    return this.httpClient
+      .post<Player>(`${this.AUTH_SERVER}/register`, user)
+      .pipe(
+        tap((player: Player) => {
           if (player) {
             this.saveToken(player);
           }
@@ -24,9 +25,10 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<Player> {
-    return this.httpClient.post<Player>(`${this.AUTH_SERVER}/login`, {username, password})
-      .pipe(tap(
-        (player: Player) => {
+    return this.httpClient
+      .post<Player>(`${this.AUTH_SERVER}/login`, { username, password })
+      .pipe(
+        tap((player: Player) => {
           if (player) {
             this.saveToken(player);
           }
@@ -36,32 +38,31 @@ export class AuthService {
 
   logout(): void {
     this.token = '';
-    localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
-    localStorage.removeItem("PLAYER");
+    localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('EXPIRES_IN');
+    localStorage.removeItem('PLAYER');
     this.router.navigate(['/home']);
   }
 
   private saveToken(player: Player): void {
-    localStorage.setItem("ACCESS_TOKEN", player.accessToken);
-    localStorage.setItem("EXPIRES_IN", player.expiresIn);
-    localStorage.setItem("PLAYER", JSON.stringify(player));
+    localStorage.setItem('ACCESS_TOKEN', player.accessToken);
+    localStorage.setItem('EXPIRES_IN', player.expiresIn);
+    localStorage.setItem('PLAYER', JSON.stringify(player));
     this.token = player.accessToken;
   }
 
   getToken(): string {
     if (!this.token) {
-      this.token = localStorage.getItem("ACCESS_TOKEN") || '';
+      this.token = localStorage.getItem('ACCESS_TOKEN') || '';
     }
     return this.token ?? '';
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('ACCESS_TOKEN');
   }
 
   getPlayer(): Player {
-    return JSON.parse(localStorage.getItem("PLAYER") ?? '');
+    return JSON.parse(localStorage.getItem('PLAYER') ?? '');
   }
-
 }

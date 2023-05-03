@@ -7,10 +7,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
 export class PlayerService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(`${environment.urlBase}/players`);
@@ -22,7 +20,9 @@ export class PlayerService {
     return this.http.post(`${environment.urlBase}/players`, { player: player });
   }
   put(player: Player) {
-    return this.http.put(`${environment.urlBase}/players/${player.username}`, { player: player });
+    return this.http.put(`${environment.urlBase}/players/${player.username}`, {
+      player: player,
+    });
   }
   delete(username: String) {
     return this.http.delete(`${environment.urlBase}/players/${username}`);

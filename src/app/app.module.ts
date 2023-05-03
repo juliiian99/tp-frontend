@@ -25,6 +25,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
+import { AuthService } from './services/auth/auth.service';
 import { TokenInterceptorService } from './services/auth/token-interceptor.service';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -53,8 +54,8 @@ const imports = [
 const config: SocketIoConfig = {
   url: environment.urlSocket,
   options: {
-    transports: ['websocket']
-  }
+    transports: ['websocket'],
+  },
 };
 
 @NgModule({
@@ -65,18 +66,16 @@ const config: SocketIoConfig = {
     PlayerCrudComponent,
     SocketComponent,
   ],
-  imports: [
-    [...imports],
-    SocketIoModule.forRoot(config),
-  ],
+  imports: [[...imports], SocketIoModule.forRoot(config)],
   providers: [
+    AuthService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
